@@ -1,0 +1,22 @@
+{
+  "name": "trainee",
+  "version": "1.0.0",
+  "description": "A project to train.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcabanilla/trainee.git"
+  },
+  "keywords": [
+    "trainer"
+  ],
+  "author": "fcabanilla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fcabanilla/trainee/issues"
+  },
+  "homepage": "https://github.com/fcabanilla/trainee#readme"
+}
