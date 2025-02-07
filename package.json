@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/fcabanilla/trainee#readme",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "devDependencies": {
