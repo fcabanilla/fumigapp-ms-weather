@@ -2,8 +2,11 @@
   "name": "trainee",
   "version": "1.0.0",
   "description": "A project to train.",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +21,18 @@
   "bugs": {
     "url": "https://github.com/fcabanilla/trainee/issues"
   },
-  "homepage": "https://github.com/fcabanilla/trainee#readme"
+  "homepage": "https://github.com/fcabanilla/trainee#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
 }
