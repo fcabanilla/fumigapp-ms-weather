@@ -1,12 +1,22 @@
-version: '3.4'
+version: "3.8"
 
 services:
-  trainee:
-    image: trainee
+  app:
     build:
       context: .
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
+      dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npm run build && npm start"
+    restart: unless-stopped
+    networks:
+      - fumigapp_network
+
+networks:
+  fumigapp_network:
+    driver: bridge
