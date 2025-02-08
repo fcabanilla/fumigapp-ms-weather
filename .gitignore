@@ -2,3 +2,4 @@ docker-compose.debug.yml
 /.vscode
 /node_modules
 .env
+/dist
