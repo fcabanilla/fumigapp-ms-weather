@@ -1,12 +1,11 @@
 // src/app.ts
 import express from "express";
 import weatherRoutes from "./routes/weather.routes";
-import { getConfigValue } from "./config/config";
-import { ConfigKeys as ck } from "./config/configKeys";
+import { getPort } from "./config/config";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
-const PORT = getConfigValue(ck.PORT);
+const PORT = getPort();
 
 // Middleware para parsear JSON
 app.use(express.json());
