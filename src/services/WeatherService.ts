@@ -1,18 +1,14 @@
-import { IWeatherService } from "./IWeatherService";
+// src/services/WeatherService.ts
 import { IWeatherProvider } from "../providers/IWeatherProvider";
-import { OpenWeatherMapProvider } from "../providers/OpenWeatherMapProvider";
 
-export class WeatherService implements IWeatherService {
-  // Aquí podrías inyectar diferentes proveedores vía configuración o DI.
+export class WeatherService {
   private weatherProvider: IWeatherProvider;
 
-  constructor() {
-    // Por ahora instanciamos un proveedor concreto.
-    this.weatherProvider = new OpenWeatherMapProvider();
+  constructor(weatherProvider: IWeatherProvider) {
+    this.weatherProvider = weatherProvider;
   }
 
   public async getCurrentWeather(location: string): Promise<any> {
-    // Puedes incluir lógica adicional (caching, validación, formateo de datos, etc.)
-    return await this.weatherProvider.fetchCurrentWeather(location);
+    return this.weatherProvider.getCurrentWeather(location);
   }
 }

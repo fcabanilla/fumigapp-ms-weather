@@ -1,31 +1,36 @@
-import { Request, Response } from "express";
+// src/controllers/WeatherController.ts
+import { Request, Response, NextFunction } from "express";
 import { WeatherService } from "../services/WeatherService";
+import { OpenWeatherMapProvider } from "../providers/OpenWeatherMapProvider";
 
 export class WeatherController {
   private weatherService: WeatherService;
 
   constructor() {
-    // Instanciar el servicio. Más adelante puedes inyectarlo.
-    this.weatherService = new WeatherService();
+    const weatherProvider = new OpenWeatherMapProvider();
+    this.weatherService = new WeatherService(weatherProvider);
   }
 
-  // Endpoint para obtener el clima actual según ubicación
-  public async getCurrentWeather(req: Request, res: Response): Promise<void> {
+  public async getCurrentWeather(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const location = req.query.location as string;
+    if (!location) {
+      res.status(400).json({ error: 'El parámetro "location" es obligatorio' });
+      return;
+    }
+
     try {
-      const location = req.query.location as string;
-      if (!location) {
-        res.status(400).json({ error: "El parámetro location es obligatorio" });
-        return;
-      }
       const data = await this.weatherService.getCurrentWeather(location);
       res.json(data);
     } catch (error) {
-      res.status(500).json({ error: "Error al obtener datos del clima" });
+      next(error);
     }
   }
 
-  // Dummy Endpoint
-  public async getDummyData(req: Request, res: Response): Promise<void> {
+  public getDummyData(req: Request, res: Response): void {
     res.json({ message: "Hello World" });
   }
 }

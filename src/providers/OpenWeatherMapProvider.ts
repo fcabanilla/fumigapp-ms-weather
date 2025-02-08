@@ -1,20 +1,21 @@
 // src/providers/OpenWeatherMapProvider.ts
+import axios from "axios";
 import { IWeatherProvider } from "./IWeatherProvider";
 import { getConfigValue } from "../config/config";
+import { ConfigKeys as ck } from "../config/configKeys";
 
 export class OpenWeatherMapProvider implements IWeatherProvider {
-  // Puedes usar fetch, axios o cualquier librería para hacer la petición HTTP
-  public async fetchCurrentWeather(location: string): Promise<any> {
-    // Aquí iría la lógica para construir la URL y hacer la solicitud.
-    // Ejemplo simplificado:
-    const apiKey = getConfigValue("OPENWEATHERMAP_KEY");
-    const url = getConfigValue("OPENWEATHERMAP_URL", { location, apiKey });
+  private apiKey: string;
+  private apiUrl: string;
 
-    // Usando fetch (asegúrate de instalar node-fetch o usar axios)
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Error al consultar OpenWeatherMap");
-    }
-    return await response.json();
+  constructor() {
+    this.apiKey = getConfigValue(ck.WEATHER_API_KEY);
+    this.apiUrl = getConfigValue(ck.WEATHER_URL);
+  }
+
+  public async getCurrentWeather(location: string): Promise<any> {
+    const url = `${this.apiUrl}?q=${location}&appid=${this.apiKey}`;
+    const response = await axios.get(url);
+    return response.data;
   }
 }

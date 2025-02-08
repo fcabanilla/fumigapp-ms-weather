@@ -1,3 +1,5 @@
+// src/providers/IWeatherProvider.ts
+
 export interface IWeatherProvider {
-  fetchCurrentWeather(location: string): Promise<any>;
+  getCurrentWeather(location: string): Promise<any>;
 }
