@@ -33,7 +33,15 @@ export function getPort(): string {
  * @returns {string} - The weather API URL.
  */
 export function getWeatherUrl(): string {
-  return getConfigValue(ConfigKeys.WEATHER_URL);
+  return getConfigValue(ConfigKeys.OPENWEATHERMAP_URL);
+}
+
+/*
+ * Retrieves the weather API base URL from environment variables.
+ * @returns {string} - The weather API URL.
+ */
+export function getWeatherBaseUrl(): string {
+  return getConfigValue(ConfigKeys.OPENWEATHER_BASE_URL);
 }
 
 /**
@@ -41,5 +49,5 @@ export function getWeatherUrl(): string {
  * @returns {string} - The weather API key.
  */
 export function getWeatherApiKey(): string {
-  return getConfigValue(ConfigKeys.WEATHER_API_KEY);
+  return getConfigValue(ConfigKeys.OPENWEATHERMAP_KEY);
 }
